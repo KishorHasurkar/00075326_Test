@@ -19,8 +19,8 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    scanners: sast 
-       # Steps represent a sequence of tasks that will be executed as part of the job
+  
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
@@ -29,11 +29,12 @@ jobs:
       uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.4
       with:
         project: GithubActionTest
-        team: "/CxServer"
+        team: CxServer
         checkmarx_url: ${{ secrets.CHECKMARX_URL }}
         checkmarx_username: ${{ secrets.CHECKMARX_USERNAME }}
         checkmarx_password: ${{ secrets.CHECKMARX_PASSWORD }}
         checkmarx_client_secret: ${{ secrets.CHECKMARX_CLIENT_SECRET }}
+        scanners: sast
     # Upload SARIF report for CodeQL / Security Alerts PRocessing
     - name: Upload SARIF file
       uses: github/codeql-action/upload-sarif@v1
